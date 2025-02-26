@@ -1,0 +1,44 @@
+<html lang="en">
+
+<body>
+    <input type="file" onchange="upload(this.files)" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();  //"http://localhost:8080/"
+
+        socket.on("download", (file) => {
+            console.log("Fichier reçu du serveur");
+
+            const blob = new Blob([file]);
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "uploaded_file";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            console.log("Fichier téléchargé avec succès");
+        });
+        //   console.log(window.location)
+
+        function upload(files) {
+            let timing = 0;
+            const timeout = setInterval(
+                () => {
+                    console.log("run")
+                    timing += 1
+                }
+                , 1)
+            console.log("test")
+            socket.emit("upload", files[0], (status) => {
+                console.log(status, timing);
+                clearInterval(timeout)
+            });
+        }
+    </script>
+</body>
+
+</html>

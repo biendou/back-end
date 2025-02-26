@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Hello!</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+   const socket = io();
+
+   // Emit "Hello" event after 4 seconds
+   // const timeout = setTimeout(
+   //    () => {
+   //       socket.emit("Hello", "world");
+   //       socket.emit("with-binary", 1, "2", { 3: "4", 5: [6, 7, 8] });
+   //    }, 4000
+   // );
+
+   // Add event listener to the button
+   function emitHello() {
+      // console.log("test")
+      // socket.emit("Hello", "world");
+      socket.emit("stream", 1, "2", { 3: "4", 5: [6, 7, 8] });
+   }
+</script>
+
+<body>
+   <h1>Integrating Socket.io with Node.js and Express</h1>
+
+   <!-- Button to emit the "Hello" event -->
+   <button onclick="emitHello()">Send Hello Event</button>
+
+</body>
+
+</html>
