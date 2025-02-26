@@ -17,4 +17,4 @@ You will need to start the server.
 
 ```sh
 # Using npm
-npm run server ]
+npm run server
